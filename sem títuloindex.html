@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super App de Afiliada</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding-bottom: 70px; }
+        .page { display: none; padding: 20px; }
+        .active { display: block; }
+        .card { background: white; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 5px; }
+        .main-btn { background: #ee4d2d; color: white; }
+        .btn-green { background: #28a745; color: white; }
+        .navbar { position: fixed; bottom: 0; width: 100%; height: 60px; background: #fff; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+    <!-- Aba Calculadora -->
+    <div id="calculadora" class="page active">
+        <div class="card">
+            <h2>Calculadora</h2>
+            <input type="number" id="preco" placeholder="Preço (R$)">
+            <input type="number" id="taxa" placeholder="Taxa (%)">
+            <button class="main-btn" onclick="calcular()">Calcular Ganho</button>
+            <p id="res_comissao" style="font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <!-- Aba Gerador -->
+    <div id="gerador" class="page">
+        <div class="card">
+            <h2>Gerador de Anúncio</h2>
+            <input type="text" id="link_entrada" placeholder="Cole o link aqui...">
+            <button class="main-btn" onclick="colarLink()">Colar e Processar</button>
+            <textarea id="res_post" rows="4" placeholder="Descrição aparecerá aqui..."></textarea>
+            <button class="btn-green" onclick="copiarTexto()">Copiar Texto</button>
+        </div>
+    </div>
+
+    <!-- Barra Inferior -->
+    <div class="navbar">
+        <button onclick="trocarPagina('calculadora')">Calculadora</button>
+        <button onclick="trocarPagina('gerador')">Gerador</button>
+        <button onclick="window.open('https://shopee.com.br/affiliate', '_blank')">Shopee</button>
+    </div>
+
+<script>
+    function trocarPagina(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    async function colarLink() {
+        try {
+            let texto = await navigator.clipboard.readText();
+            document.getElementById('link_entrada').value = texto;
+            document.getElementById('res_post').value = "OFERTA: Produto incrível!\nGaranta o seu: " + texto + "\n#shopee #achadinhos";
+        } catch(err) { alert("Permissão de colar negada."); }
+    }
+
+    function calcular() {
+        let p = document.getElementById('preco').value;
+        let t = document.getElementById('taxa').value;
+        let res = (p * t) / 100;
+        document.getElementById('res_comissao').innerText = "Ganho estimado: R$ " + res.toFixed(2);
+    }
+
+    function copiarTexto() {
+        document.getElementById('res_post').select();
+        document.execCommand('copy');
+        alert("Texto copiado!");
+    }
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super App de Afiliada</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding-bottom: 70px; }
+        .page { display: none; padding: 20px; }
+        .active { display: block; }
+        .card { background: white; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 5px; }
+        .main-btn { background: #ee4d2d; color: white; }
+        .btn-green { background: #28a745; color: white; }
+        .navbar { position: fixed; bottom: 0; width: 100%; height: 60px; background: #fff; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+    <!-- Aba Calculadora -->
+    <div id="calculadora" class="page active">
+        <div class="card">
+            <h2>Calculadora</h2>
+            <input type="number" id="preco" placeholder="Preço (R$)">
+            <input type="number" id="taxa" placeholder="Taxa (%)">
+            <button class="main-btn" onclick="calcular()">Calcular Ganho</button>
+            <p id="res_comissao" style="font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <!-- Aba Gerador -->
+    <div id="gerador" class="page">
+        <div class="card">
+            <h2>Gerador de Anúncio</h2>
+            <input type="text" id="link_entrada" placeholder="Cole o link aqui...">
+            <button class="main-btn" onclick="colarLink()">Colar e Processar</button>
+            <textarea id="res_post" rows="4" placeholder="Descrição aparecerá aqui..."></textarea>
+            <button class="btn-green" onclick="copiarTexto()">Copiar Texto</button>
+        </div>
+    </div>
+
+    <!-- Barra Inferior -->
+    <div class="navbar">
+        <button onclick="trocarPagina('calculadora')">Calculadora</button>
+        <button onclick="trocarPagina('gerador')">Gerador</button>
+        <button onclick="window.open('https://shopee.com.br/affiliate', '_blank')">Shopee</button>
+    </div>
+
+<script>
+    function trocarPagina(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    async function colarLink() {
+        try {
+            let texto = await navigator.clipboard.readText();
+            document.getElementById('link_entrada').value = texto;
+            document.getElementById('res_post').value = "OFERTA: Produto incrível!\nGaranta o seu: " + texto + "\n#shopee #achadinhos";
+        } catch(err) { alert("Permissão de colar negada."); }
+    }
+
+    function calcular() {
+        let p = document.getElementById('preco').value;
+        let t = document.getElementById('taxa').value;
+        let res = (p * t) / 100;
+        document.getElementById('res_comissao').innerText = "Ganho estimado: R$ " + res.toFixed(2);
+    }
+
+    function copiarTexto() {
+        document.getElementById('res_post').select();
+        document.execCommand('copy');
+        alert("Texto copiado!");
+    }
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super App de Afiliada</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding-bottom: 70px; }
+        .page { display: none; padding: 20px; }
+        .active { display: block; }
+        .card { background: white; padding: 15px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 5px; }
+        .main-btn { background: #ee4d2d; color: white; }
+        .btn-green { background: #28a745; color: white; }
+        .navbar { position: fixed; bottom: 0; width: 100%; height: 60px; background: #fff; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+    <!-- Aba Calculadora -->
+    <div id="calculadora" class="page active">
+        <div class="card">
+            <h2>Calculadora</h2>
+            <input type="number" id="preco" placeholder="Preço (R$)">
+            <input type="number" id="taxa" placeholder="Taxa (%)">
+            <button class="main-btn" onclick="calcular()">Calcular Ganho</button>
+            <p id="res_comissao" style="font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <!-- Aba Gerador -->
+    <div id="gerador" class="page">
+        <div class="card">
+            <h2>Gerador de Anúncio</h2>
+            <input type="text" id="link_entrada" placeholder="Cole o link aqui...">
+            <button class="main-btn" onclick="colarLink()">Colar e Processar</button>
+            <textarea id="res_post" rows="4" placeholder="Descrição aparecerá aqui..."></textarea>
+            <button class="btn-green" onclick="copiarTexto()">Copiar Texto</button>
+        </div>
+    </div>
+
+    <!-- Barra Inferior -->
+    <div class="navbar">
+        <button onclick="trocarPagina('calculadora')">Calculadora</button>
+        <button onclick="trocarPagina('gerador')">Gerador</button>
+        <button onclick="window.open('https://shopee.com.br/affiliate', '_blank')">Shopee</button>
+    </div>
+
+<script>
+    function trocarPagina(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    async function colarLink() {
+        try {
+            let texto = await navigator.clipboard.readText();
+            document.getElementById('link_entrada').value = texto;
+            document.getElementById('res_post').value = "OFERTA: Produto incrível!\nGaranta o seu: " + texto + "\n#shopee #achadinhos";
+        } catch(err) { alert("Permissão de colar negada."); }
+    }
+
+    function calcular() {
+        let p = document.getElementById('preco').value;
+        let t = document.getElementById('taxa').value;
+        let res = (p * t) / 100;
+        document.getElementById('res_comissao').innerText = "Ganho estimado: R$ " + res.toFixed(2);
+    }
+
+    function copiarTexto() {
+        document.getElementById('res_post').select();
+        document.execCommand('copy');
+        alert("Texto copiado!");
+    }
+</script>
+</body>
+</html>
